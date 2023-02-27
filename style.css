@@ -10,12 +10,24 @@ html {
 body {
   background-color: #d39417;
   margin: auto;
-  max-width: 100vh;
+  max-width: 960px;
   max-height: 100%;
   border-radius: 2px;
 }
 
 main{
   margin: auto;
-  height: 1080px;
+  height: 100px;
+}
+
+.game{
+  border: 2px solid red;
+}
+
+.card{
+  border
+}
+
+.back, .front{
+  width: 100px;
 }
