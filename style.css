@@ -46,7 +46,7 @@ main{
 
 .card:active{
   transform: scale(.97);
-  transition: transform .3s;
+  transition: transform .1s;
 }
 
 .back, .front{
