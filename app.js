@@ -4,6 +4,7 @@ console.log('hello world')
 const cards = document.querySelectorAll(".card")
 
 let hasFlipped = false;
+let lock = false;
 let firstCard;
 let secondCard;
 
@@ -13,6 +14,8 @@ cards.forEach( card => {
 });
 
 function flip(){
+  if (lock === true) return;
+  if (this === firstCard) return;
   this.classList.toggle('flip')
 
   if(!hasFlipped){
@@ -21,7 +24,6 @@ function flip(){
     firstCard = this;
 
   } else{
-    hasFlipped = false;
     secondCard = this;
     checkMatch();
   }
@@ -41,14 +43,42 @@ function cardDisable(){
 
   firstCard.removeEventListener('click', flip)
   secondCard.removeEventListener('click', flip)
-
+  reset();
 }
 
-unflip = () => {
+let unflip = () => {
+
+  lock = true;
+
   setTimeout( () => {
     firstCard.classList.remove('flip');
     secondCard.classList.remove('flip');
 
+    // lock = false;
+    reset();
   },1500);
 
 }
+
+function reset(){
+  [hasFlipped, lock] = [false, false];
+  [firstCard, secondCard] = [null, null];
+}
+
+function resetBoard(){
+
+  cards.forEach(card => {
+    card.classList.remove('flip')
+  }); //removes flip class to 'clear' the board
+
+  reset();
+
+}
+
+(function shuffle(){
+  cards.forEach(card => {
+    let random = Math.floor(Math.random() * 16);
+    card.style.order = random;
+  })
+})(); // invoked right after definition
+
