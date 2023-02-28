@@ -59,4 +59,9 @@ main{
 
 .front{
   transform: rotateY(180deg);
+  background-color: #025098;
+  margin: auto;
+  text-align: center;
+  padding: 25% 0;
+  vertical-align: middle;
 }
