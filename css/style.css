@@ -15,15 +15,14 @@ header{
 }
 
 h1, .logo {
-  text-align: left;
-  /* float: left; */
   margin: 25px auto auto 25px;
 }
 
 nav {
   text-align: center;
   color:black;
-  margin: auto
+  margin: auto;
+  margin-bottom: 10px;
 }
 
 nav a {

@@ -19,6 +19,11 @@
   transition: transform .5s;
 }
 
+.card:hover{
+  border: solid 2px #FFF;
+  border-radius: 10px;
+}
+
 .card.flip{
   transform: rotateY(180deg);
 }
