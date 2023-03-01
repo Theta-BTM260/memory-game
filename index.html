@@ -6,14 +6,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>HTMLCSS Memory</title>
-  <link href="style.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+  <link href="css/game.css" rel="stylesheet">
 
 
 </head>
 
 <body>
   <header>
-    <h1>Title</h1>
+    <!-- <h1>Title</h1> -->
+    <img id="logo" src="img/logo.png" alt="logo for the HTML CSS matching game with a clip art of a mini sd card" title="logo"> 
     <nav>
       <a href="index.html">Home</a>
       <a href="score.html">Scoreboard</a>
@@ -57,7 +59,7 @@
         <img src="img/cardFace.jpg" alt="card face of some java code" class="back">
       </div>
       <div class="card" data-framework="id">
-        <div class="front">#</div>
+        <div class="front" style="font-size:1.5em;">#</div>
         <img src="img/cardFace.jpg" alt="card face of some java code" class="back">
       </div>
       <div class="card" data-framework="id">
@@ -65,7 +67,7 @@
         <img src="img/cardFace.jpg" alt="card face of some java code" class="back">
       </div>
       <div class="card" data-framework="class">
-        <div class="front">.</div>
+        <div class="front" style="font-size:1.5em;">.</div>
         <img src="img/cardFace.jpg" alt="card face of some java code" class="back">
       </div>
       <div class="card" data-framework="class">
@@ -93,7 +95,7 @@
     <button onclick=resetBoard()>reset</button>
   </main>
 
-  <!-- <footer>&copy;HTMLCSS Memory </footer> -->
+  <footer>&copy;HTMLCSS Memory </footer>
 </body>
 
 <script src="app.js"></script>
