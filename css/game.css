@@ -1,25 +1,4 @@
-* {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-}
-html {
-  background-color: #FFF;
-}
-
-body {
-  background-color: #d39417;
-  width: 100vh;
-  margin:auto;
-  height: 100vh;
-  border-radius: 2px;
-}
-
-main{
-  margin: auto;
-  /* height: 100px; */
-}
-
+/* This is the game styling */
 .game{
   width: 640px;
   height: 640px;
