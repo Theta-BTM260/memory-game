@@ -10,10 +10,14 @@ let secondCard;
 let timeLeft = 5;
 
 const startBtn = document.getElementById('start-btn')
+const resetBtn = document.getElementById('reset');
 
 document.getElementById('timer').textContent = timeLeft
 
 startBtn.addEventListener('click', () => {
+  cards.forEach(card => {
+    card.addEventListener('click', flip)
+  });
 
   let gameTimer = setInterval(() => {
     // decrement timer
@@ -27,14 +31,21 @@ startBtn.addEventListener('click', () => {
     if (timeLeft === 0) {
       alert('Time is up!')
       clearInterval(gameTimer);
+
+      cards.forEach(card => {
+        card.removeEventListener('click', flip)
+      });
     }
 
+    
   }, 1000);
-
-})
-cards.forEach(card => {
-  card.addEventListener('click', flip)
+  
 });
+
+
+// cards.forEach(card => {
+//   card.addEventListener('click', flip)
+// });
 
 function flip() {
   if (lock === true) return;
@@ -86,8 +97,22 @@ let unflip = () => {
 function reset() {
   [hasFlipped, lock] = [false, false];
   [firstCard, secondCard] = [null, null];
-  timeLeft = 60
+  timeLeft = 5
+  document.getElementById('timer').textContent = timeLeft
+
 }
+
+
+resetBtn.addEventListener('click', () => {
+  resetBoard();
+});
+
+function shuffle() {
+  cards.forEach(card => {
+    let random = Math.floor(Math.random() * 16);
+    card.style.order = random;
+  })
+}; 
 
 function resetBoard() {
 
@@ -96,13 +121,5 @@ function resetBoard() {
   }); //removes flip class to 'clear' the board
 
   reset();
-
+  shuffle();
 }
-
-(function shuffle() {
-  cards.forEach(card => {
-    let random = Math.floor(Math.random() * 16);
-    card.style.order = random;
-  })
-})(); // invoked right after definition
-
