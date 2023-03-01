@@ -8,11 +8,41 @@ html {
   background-color: #FFF;
 }
 
+header{
+  border: 1px solid black;
+  text-align: center;
+  
+}
+
+h1, .logo {
+  text-align: left;
+  /* float: left; */
+  margin: 25px auto auto 25px;
+}
+
+nav {
+  text-align: center;
+  color:black;
+  margin: auto
+}
+
+nav a {
+  /* margin-right: 40px; */
+  margin: auto;
+  font-size: 1.4em;
+  text-decoration: none;
+  color: black;
+}
+nav a:hover{
+  border-bottom: solid 2px #FFF;
+  border-top: solid 2px #FFF;
+}
+
 body {
   background-color: #d39417;
   width: 100vh;
   margin:auto;
-  height: 100vh;
+  height: auto;
   border-radius: 2px;
 }
 
