@@ -19,7 +19,15 @@ startBtn.addEventListener('click', () => {
     card.addEventListener('click', flip)
   });
 
+  //check if timer is 0
+  if(timeLeft === 0) {
+    alert('press reset before starting new game!')
+    return;
+  }
+
   let gameTimer = setInterval(() => {
+
+
     // decrement timer
     timeLeft--;
 
