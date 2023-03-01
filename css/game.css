@@ -1,25 +1,4 @@
-* {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-}
-html {
-  background-color: #FFF;
-}
-
-body {
-  background-color: #d39417;
-  width: 100vh;
-  margin:auto;
-  height: 100vh;
-  border-radius: 2px;
-}
-
-main{
-  margin: auto;
-  /* height: 100px; */
-}
-
+/* This is the game styling */
 .game{
   width: 640px;
   height: 640px;
@@ -38,6 +17,11 @@ main{
   transform: scale(1);
   transform-style: preserve-3d;
   transition: transform .5s;
+}
+
+.card:hover{
+  border: solid 2px #FFF;
+  border-radius: 10px;
 }
 
 .card.flip{
@@ -59,4 +43,9 @@ main{
 
 .front{
   transform: rotateY(180deg);
+  background-color: #025098;
+  margin: auto;
+  text-align: center;
+  padding: 25% 0;
+  vertical-align: middle;
 }
