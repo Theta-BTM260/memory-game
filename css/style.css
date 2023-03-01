@@ -6,6 +6,7 @@
 }
 html {
   background-color: #FFF;
+  background-image: linear-gradient(to bottom right, #FFF, #d39417,#025098, #000 );
 }
 
 header{
