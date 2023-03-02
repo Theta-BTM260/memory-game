@@ -7,13 +7,13 @@ let hasFlipped = false;
 let lock = false;
 let firstCard;
 let secondCard;
-let timeLeft = 5;
+let timeLeft = 10;
 let score = 0;
 
 const startBtn = document.getElementById('start-btn')
 const resetBtn = document.getElementById('reset');
 
-document.getElementById('timer').textContent = timeLeft
+document.getElementById('timer').textContent = `Timer: ${timeLeft} seconds`;
 
 startBtn.addEventListener('click', () => {
   cards.forEach(card => {
@@ -108,8 +108,8 @@ let unflip = () => {
 function reset() {
   [hasFlipped, lock] = [false, false];
   [firstCard, secondCard] = [null, null];
-  timeLeft = 5
-  document.getElementById('timer').textContent = timeLeft
+  // timeLeft = 55
+  // document.getElementById('timer').textContent = `Timer: ${timeLeft}`;
 
 }
 
@@ -130,6 +130,9 @@ function resetBoard() {
   cards.forEach(card => {
     card.classList.remove('flip')
   }); //removes flip class to 'clear' the board
+
+  timeLeft = 55
+  document.getElementById('timer').textContent = `Timer: ${timeLeft}`; //Sets timer back to og time
 
   reset();
   shuffle();
