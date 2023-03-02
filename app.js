@@ -7,7 +7,7 @@ let hasFlipped = false;
 let lock = false;
 let firstCard;
 let secondCard;
-let timeLeft = 10;
+let timeLeft = 60;
 let score = 0;
 
 const startBtn = document.getElementById('start-btn')
@@ -131,7 +131,7 @@ function resetBoard() {
     card.classList.remove('flip')
   }); //removes flip class to 'clear' the board
 
-  timeLeft = 55
+  timeLeft = 60;
   document.getElementById('timer').textContent = `Timer: ${timeLeft}`; //Sets timer back to og time
 
   reset();
