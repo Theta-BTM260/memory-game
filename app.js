@@ -8,6 +8,7 @@ let lock = false;
 let firstCard;
 let secondCard;
 let timeLeft = 5;
+let score = 0;
 
 const startBtn = document.getElementById('start-btn')
 const resetBtn = document.getElementById('reset');
@@ -75,6 +76,8 @@ function flip() {
 function checkMatch() {
   if (firstCard.dataset.framework === secondCard.dataset.framework) { //match
     cardDisable()
+    // let currentTime = document.getElementById('timer')
+    console.log("this is current time", currentTime);
 
   } else { //NOT match
     unflip();
