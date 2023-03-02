@@ -7,39 +7,84 @@ let hasFlipped = false;
 let lock = false;
 let firstCard;
 let secondCard;
+let timeLeft = 60;
+let score = 0;
+
+const startBtn = document.getElementById('start-btn')
+const resetBtn = document.getElementById('reset');
+
+document.getElementById('timer').textContent = `Timer: ${timeLeft} seconds`;
+
+startBtn.addEventListener('click', () => {
+  cards.forEach(card => {
+    card.addEventListener('click', flip)
+  });
+
+  //check if timer is 0
+  if(timeLeft === 0) {
+    alert('press reset before starting new game!')
+    return;
+  }
+
+  let gameTimer = setInterval(() => {
 
 
-cards.forEach( card => {
-  card.addEventListener('click', flip)
+    // decrement timer
+    timeLeft--;
+
+    //update DOM
+    document.getElementById('timer').textContent = timeLeft
+
+    //check if 0
+
+    if (timeLeft === 0) {
+      alert('Time is up!')
+      clearInterval(gameTimer);
+
+      cards.forEach(card => {
+        card.removeEventListener('click', flip)
+      });
+    }
+
+    
+  }, 1000);
+  
 });
 
-function flip(){
+
+// cards.forEach(card => {
+//   card.addEventListener('click', flip)
+// });
+
+function flip() {
   if (lock === true) return;
   if (this === firstCard) return;
   this.classList.toggle('flip')
 
-  if(!hasFlipped){
+  if (!hasFlipped) {
 
     hasFlipped = true;
     firstCard = this;
 
-  } else{
+  } else {
     secondCard = this;
     checkMatch();
   }
 };
 
 
-function checkMatch(){
-  if(firstCard.dataset.framework === secondCard.dataset.framework){ //match
+function checkMatch() {
+  if (firstCard.dataset.framework === secondCard.dataset.framework) { //match
     cardDisable()
+    // let currentTime = document.getElementById('timer')
+    console.log("this is current time", currentTime);
 
   } else { //NOT match
     unflip();
   }
 }
 
-function cardDisable(){
+function cardDisable() {
 
   firstCard.removeEventListener('click', flip)
   secondCard.removeEventListener('click', flip)
@@ -50,35 +95,45 @@ let unflip = () => {
 
   lock = true;
 
-  setTimeout( () => {
+  setTimeout(() => {
     firstCard.classList.remove('flip');
     secondCard.classList.remove('flip');
 
     // lock = false;
     reset();
-  },1500);
+  }, 1500);
 
 }
 
-function reset(){
+function reset() {
   [hasFlipped, lock] = [false, false];
   [firstCard, secondCard] = [null, null];
+  // timeLeft = 55
+  // document.getElementById('timer').textContent = `Timer: ${timeLeft}`;
+
 }
 
-function resetBoard(){
+
+resetBtn.addEventListener('click', () => {
+  resetBoard();
+});
+
+function shuffle() {
+  cards.forEach(card => {
+    let random = Math.floor(Math.random() * 16);
+    card.style.order = random;
+  })
+}; 
+
+function resetBoard() {
 
   cards.forEach(card => {
     card.classList.remove('flip')
   }); //removes flip class to 'clear' the board
 
+  timeLeft = 60;
+  document.getElementById('timer').textContent = `Timer: ${timeLeft}`; //Sets timer back to og time
+
   reset();
-
+  shuffle();
 }
-
-(function shuffle(){
-  cards.forEach(card => {
-    let random = Math.floor(Math.random() * 16);
-    card.style.order = random;
-  })
-})(); // invoked right after definition
-
