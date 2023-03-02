@@ -25,7 +25,7 @@ startBtn.addEventListener('click', () => {
     alert('press reset before starting new game!')
     return;
   }
-
+  shuffle()
   let gameTimer = setInterval(() => {
 
 
