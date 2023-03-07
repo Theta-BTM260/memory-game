@@ -25,7 +25,7 @@ startBtn.addEventListener('click', () => {
     alert('press reset before starting new game!')
     return;
   }
-  shuffle()
+  // shuffle()
   let gameTimer = setInterval(() => {
 
 
@@ -35,17 +35,19 @@ startBtn.addEventListener('click', () => {
     //update DOM
     document.getElementById('timer').textContent = timeLeft
 
+    
     //check if 0
-
+    
     if (timeLeft === 0) {
       alert('Time is up!')
       clearInterval(gameTimer);
-
+      
       cards.forEach(card => {
         card.removeEventListener('click', flip)
       });
     }
-
+    
+    return timeLeft;
     
   }, 1000);
   
@@ -76,8 +78,10 @@ function flip() {
 function checkMatch() {
   if (firstCard.dataset.framework === secondCard.dataset.framework) { //match
     cardDisable()
-    // let currentTime = document.getElementById('timer')
-    console.log("this is current time", currentTime);
+
+    score += timeLeft
+    console.log(score, 'this is the score')
+
 
   } else { //NOT match
     unflip();
