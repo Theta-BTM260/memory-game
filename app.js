@@ -7,8 +7,9 @@ let hasFlipped = false;
 let lock = false;
 let firstCard;
 let secondCard;
-let timeLeft = 60;
+let timeLeft = 5;
 let score = 0;
+let matchCount = 0;
 
 const startBtn = document.getElementById('start-btn')
 const resetBtn = document.getElementById('reset');
@@ -35,7 +36,7 @@ startBtn.addEventListener('click', () => {
     //update DOM
     document.getElementById('timer').textContent = timeLeft
 
-    
+    console.log(matchCount, 'this is card match');
     //check if 0
     
     if (timeLeft === 0) {
@@ -53,10 +54,6 @@ startBtn.addEventListener('click', () => {
   
 });
 
-
-// cards.forEach(card => {
-//   card.addEventListener('click', flip)
-// });
 
 function flip() {
   if (lock === true) return;
@@ -80,7 +77,8 @@ function checkMatch() {
     cardDisable()
 
     score += timeLeft
-    console.log(score, 'this is the score')
+    matchCount +=1
+    // console.log(score, 'this is the score')
 
 
   } else { //NOT match
