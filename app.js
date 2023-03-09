@@ -1,5 +1,4 @@
 'use strict'
-console.log('hello world')
 
 const cards = document.querySelectorAll(".card")
 
@@ -7,8 +6,10 @@ let hasFlipped = false;
 let lock = false;
 let firstCard;
 let secondCard;
-let timeLeft = 60;
+let timeLeft = 120;
 let score = 0;
+let matchCount = 0;
+let scoreEl = document.getElementById('score');
 
 const startBtn = document.getElementById('start-btn')
 const resetBtn = document.getElementById('reset');
@@ -21,7 +22,7 @@ startBtn.addEventListener('click', () => {
   });
 
   //check if timer is 0
-  if(timeLeft === 0) {
+  if (timeLeft === 0) {
     alert('press reset before starting new game!')
     return;
   }
@@ -35,10 +36,21 @@ startBtn.addEventListener('click', () => {
     //update DOM
     document.getElementById('timer').textContent = timeLeft
 
+    //if all matches found before timer is done remove event listener and counter
+    if (matchCount === 8) {
+
+      clearInterval(gameTimer);
+      alert('you beat the clock! Go again?')
+      cards.forEach(card => {
+        card.removeEventListener('click', flip)
+      });
+    }
+
+
     //check if 0
 
     if (timeLeft === 0) {
-      alert('Time is up!')
+      alert('Time is up! click reset to try again.');
       clearInterval(gameTimer);
 
       cards.forEach(card => {
@@ -46,15 +58,12 @@ startBtn.addEventListener('click', () => {
       });
     }
 
-    
+    return timeLeft;
+
   }, 1000);
-  
+
 });
 
-
-// cards.forEach(card => {
-//   card.addEventListener('click', flip)
-// });
 
 function flip() {
   if (lock === true) return;
@@ -76,8 +85,13 @@ function flip() {
 function checkMatch() {
   if (firstCard.dataset.framework === secondCard.dataset.framework) { //match
     cardDisable()
-    // let currentTime = document.getElementById('timer')
-    console.log("this is current time", currentTime);
+
+    score += timeLeft
+    matchCount += 1
+    if (matchCount === 8) {
+      scoreEl.textContent = `your final score is ${score}`;
+    }
+
 
   } else { //NOT match
     unflip();
@@ -99,18 +113,15 @@ let unflip = () => {
     firstCard.classList.remove('flip');
     secondCard.classList.remove('flip');
 
-    // lock = false;
+    lock = false;
     reset();
-  }, 1500);
+  }, 2300);
 
 }
 
 function reset() {
   [hasFlipped, lock] = [false, false];
   [firstCard, secondCard] = [null, null];
-  // timeLeft = 55
-  // document.getElementById('timer').textContent = `Timer: ${timeLeft}`;
-
 }
 
 
@@ -123,7 +134,7 @@ function shuffle() {
     let random = Math.floor(Math.random() * 16);
     card.style.order = random;
   })
-}; 
+};
 
 function resetBoard() {
 
@@ -131,9 +142,11 @@ function resetBoard() {
     card.classList.remove('flip')
   }); //removes flip class to 'clear' the board
 
-  timeLeft = 60;
+  timeLeft = 120;
   document.getElementById('timer').textContent = `Timer: ${timeLeft}`; //Sets timer back to og time
-
+  scoreEl.textContent = ''
+  matchCount = 0;
+  score = 0;
   reset();
   shuffle();
 }
