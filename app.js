@@ -7,7 +7,7 @@ let hasFlipped = false;
 let lock = false;
 let firstCard;
 let secondCard;
-let timeLeft = 120;
+let timeLeft = 10;
 let score = 0;
 let matchCount = 0;
 let scoreEl = document.getElementById('score');
@@ -93,6 +93,12 @@ function checkMatch() {
     matchCount +=1
     console.log(score, 'this is the score')
 
+    if(matchCount === 8){
+      console.log('something')
+
+      scoreEl.textContent = `your final score is ${score}`;
+    }
+
 
   } else { //NOT match
     unflip();
@@ -114,7 +120,7 @@ let unflip = () => {
     firstCard.classList.remove('flip');
     secondCard.classList.remove('flip');
 
-    // lock = false;
+    lock = false;
     reset();
   }, 2300);
 
@@ -123,9 +129,6 @@ let unflip = () => {
 function reset() {
   [hasFlipped, lock] = [false, false];
   [firstCard, secondCard] = [null, null];
-  // timeLeft = 55
-  // document.getElementById('timer').textContent = `Timer: ${timeLeft}`;
-
 }
 
 
@@ -148,9 +151,9 @@ function resetBoard() {
 
   timeLeft = 120;
   document.getElementById('timer').textContent = `Timer: ${timeLeft}`; //Sets timer back to og time
-
+scoreEl.textContent = ''
   matchCount = 0;
   score = 0;
   reset();
-  shuffle();
+  // shuffle();
 }
