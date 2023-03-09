@@ -7,9 +7,10 @@ let hasFlipped = false;
 let lock = false;
 let firstCard;
 let secondCard;
-let timeLeft = 5;
+let timeLeft = 120;
 let score = 0;
 let matchCount = 0;
+let scoreEl = document.getElementById('score');
 
 const startBtn = document.getElementById('start-btn')
 const resetBtn = document.getElementById('reset');
@@ -36,11 +37,23 @@ startBtn.addEventListener('click', () => {
     //update DOM
     document.getElementById('timer').textContent = timeLeft
 
-    console.log(matchCount, 'this is card match');
+    //if all matches found before timer is done remove event listener and counter
+    console.log(matchCount, 'this is match count');
+
+    if(matchCount === 8){
+
+      clearInterval(gameTimer);
+      alert('you beat the clock! Go again?')
+      cards.forEach(card => {
+        card.removeEventListener('click', flip)
+      });
+    }
+    
+    
     //check if 0
     
     if (timeLeft === 0) {
-      alert('Time is up!')
+      alert('Time is up! click reset to try again.');
       clearInterval(gameTimer);
       
       cards.forEach(card => {
@@ -78,7 +91,7 @@ function checkMatch() {
 
     score += timeLeft
     matchCount +=1
-    // console.log(score, 'this is the score')
+    console.log(score, 'this is the score')
 
 
   } else { //NOT match
@@ -103,7 +116,7 @@ let unflip = () => {
 
     // lock = false;
     reset();
-  }, 1500);
+  }, 2300);
 
 }
 
@@ -133,9 +146,11 @@ function resetBoard() {
     card.classList.remove('flip')
   }); //removes flip class to 'clear' the board
 
-  timeLeft = 60;
+  timeLeft = 120;
   document.getElementById('timer').textContent = `Timer: ${timeLeft}`; //Sets timer back to og time
 
+  matchCount = 0;
+  score = 0;
   reset();
   shuffle();
 }
