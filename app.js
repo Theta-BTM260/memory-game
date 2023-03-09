@@ -1,5 +1,4 @@
 'use strict'
-console.log('hello world')
 
 const cards = document.querySelectorAll(".card")
 
@@ -7,7 +6,7 @@ let hasFlipped = false;
 let lock = false;
 let firstCard;
 let secondCard;
-let timeLeft = 10;
+let timeLeft = 120;
 let score = 0;
 let matchCount = 0;
 let scoreEl = document.getElementById('score');
@@ -23,11 +22,11 @@ startBtn.addEventListener('click', () => {
   });
 
   //check if timer is 0
-  if(timeLeft === 0) {
+  if (timeLeft === 0) {
     alert('press reset before starting new game!')
     return;
   }
-  // shuffle()
+  shuffle()
   let gameTimer = setInterval(() => {
 
 
@@ -38,9 +37,7 @@ startBtn.addEventListener('click', () => {
     document.getElementById('timer').textContent = timeLeft
 
     //if all matches found before timer is done remove event listener and counter
-    console.log(matchCount, 'this is match count');
-
-    if(matchCount === 8){
+    if (matchCount === 8) {
 
       clearInterval(gameTimer);
       alert('you beat the clock! Go again?')
@@ -48,23 +45,23 @@ startBtn.addEventListener('click', () => {
         card.removeEventListener('click', flip)
       });
     }
-    
-    
+
+
     //check if 0
-    
+
     if (timeLeft === 0) {
       alert('Time is up! click reset to try again.');
       clearInterval(gameTimer);
-      
+
       cards.forEach(card => {
         card.removeEventListener('click', flip)
       });
     }
-    
+
     return timeLeft;
-    
+
   }, 1000);
-  
+
 });
 
 
@@ -90,12 +87,8 @@ function checkMatch() {
     cardDisable()
 
     score += timeLeft
-    matchCount +=1
-    console.log(score, 'this is the score')
-
-    if(matchCount === 8){
-      console.log('something')
-
+    matchCount += 1
+    if (matchCount === 8) {
       scoreEl.textContent = `your final score is ${score}`;
     }
 
@@ -141,7 +134,7 @@ function shuffle() {
     let random = Math.floor(Math.random() * 16);
     card.style.order = random;
   })
-}; 
+};
 
 function resetBoard() {
 
@@ -151,9 +144,9 @@ function resetBoard() {
 
   timeLeft = 120;
   document.getElementById('timer').textContent = `Timer: ${timeLeft}`; //Sets timer back to og time
-scoreEl.textContent = ''
+  scoreEl.textContent = ''
   matchCount = 0;
   score = 0;
   reset();
-  // shuffle();
+  shuffle();
 }
